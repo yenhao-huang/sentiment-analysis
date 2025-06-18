@@ -1,12 +1,15 @@
 Goal: fine tune a sentiment analysis model
 
-## TODO
+## Done
 * 其他 DATASETS
     * finetune 後與 finetune
     * 不同模型的交互
-* 更改模型後的形狀
 * 了解 huggingface trainer 能修改的參數
-    * performance: activation、model_arch
+
+## TODO
+
+* 更改模型後的形狀
+* 了解 system-level 的參數
     * efficiency: quantization 
 
 ## Dataset
@@ -33,6 +36,7 @@ Goal: fine tune a sentiment analysis model
 
 
 ## Results
+### Baseline v.s. Finetune v.s. Finetune+Hyper
 IMDB
 with finetune+hyperparameter: 93.2%
 with finetune: 93.2%
@@ -44,18 +48,11 @@ with finetune: 92.4%
 without finetune: 34.9%
 
 Sp1786
-with finetune+hyperparameter: 75%
-with finetune: 75%
+with finetune+hyperparameter: 75.0%
+with finetune: 74.9%
 without finetune: 37.0%
 
 ### Generalization
 IMDB to dair-ai/emotion and Sp1786
-
-## Learning
-命名邏輯
-* utils
-    * 動作_utils.py 
-* scripts
-    * 動作.py
-* experiments
-    * 動作_模型_資料集[_補充說明].sh
+dair-ai/emotion: 18.0%
+Sp1786: 24.9%

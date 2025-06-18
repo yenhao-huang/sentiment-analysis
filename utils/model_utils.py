@@ -1,3 +1,4 @@
+from models.bert_with_extra_features import BertWithEmbeddingFusion
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
 
 def set_eval_agent(model_name, num_labels, metrics_strategy):
@@ -11,6 +12,31 @@ def set_eval_agent(model_name, num_labels, metrics_strategy):
         compute_metrics=metrics_strategy,
     )
     return eval_agent
+
+def set_train_agent_custom(model_name, train_dataset, eval_dataset, tokenizer, num_labels, metrics_strategy, output_dir):
+    model = BertWithEmbeddingFusion(model_name, num_labels=num_labels, extra_feature_classes=2)
+
+    args = TrainingArguments(
+        output_dir=output_dir,
+        learning_rate=2e-5,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=8,
+        num_train_epochs=2,
+        weight_decay=0.01,
+        eval_strategy="epoch",
+        save_strategy="epoch",
+        load_best_model_at_end=True,
+    )
+
+    train_agent = Trainer(
+        model=model,
+        args=args,
+        train_dataset=train_dataset,
+        eval_dataset=eval_dataset,
+        tokenizer=tokenizer,
+        compute_metrics=metrics_strategy,
+    )
+    return train_agent
 
 def set_train_agent(model_name, train_dataset, eval_dataset, tokenizer, num_labels, metrics_strategy, output_dir):
     model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels, ignore_mismatched_sizes=True)
