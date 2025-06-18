@@ -7,7 +7,7 @@ def data_loading(dataset_name):
 
 # Output: DatasetDir: {"train":tokenized_train_data,"test":tokenized_test_data}
 def data_preprocess(raw_data, model_name, text_col, label_col):
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, ignore_mismatched_sizes=True)
 
     def tokenize(batch):
         texts = [x if isinstance(x, str) else "" for x in batch[text_col]]

@@ -1,7 +1,7 @@
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
 
 def set_eval_agent(model_name, num_labels, metrics_strategy):
-    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels, ignore_mismatched_sizes=True)
 
     args = TrainingArguments(output_dir="./results", per_device_eval_batch_size=16)
 
@@ -13,7 +13,7 @@ def set_eval_agent(model_name, num_labels, metrics_strategy):
     return eval_agent
 
 def set_train_agent(model_name, train_dataset, eval_dataset, tokenizer, num_labels, metrics_strategy, output_dir):
-    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels, ignore_mismatched_sizes=True)
 
     args = TrainingArguments(
         output_dir=output_dir,
