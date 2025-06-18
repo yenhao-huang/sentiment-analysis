@@ -1,4 +1,3 @@
-from models.bert_with_extra_features import BertWithEmbeddingFusion
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
 
 def set_eval_agent(model_name, num_labels, metrics_strategy):
@@ -13,7 +12,7 @@ def set_eval_agent(model_name, num_labels, metrics_strategy):
     )
     return eval_agent
 
-def set_train_agent(model_name, train_dataset, eval_dataset, tokenizer, num_labels, metrics_strategy, output_dir):
+def set_train_agent(model_name, train_dataset, eval_dataset, tokenizer, num_labels, metrics_strategy, output_dir, is_fp16=False):
     model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels, ignore_mismatched_sizes=True)
 
     args = TrainingArguments(
@@ -26,8 +25,9 @@ def set_train_agent(model_name, train_dataset, eval_dataset, tokenizer, num_labe
         eval_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
+        fp16=is_fp16,
     )
-
+    
     train_agent = Trainer(
         model=model,
         args=args,
@@ -72,7 +72,7 @@ def run_train_agent_hyper(model_name, train_dataset, eval_dataset, tokenizer, nu
     best_run = train_agent.hyperparameter_search(
         direction="maximize",
         hp_space=hp_space,
-        n_trials=2,
+        n_trials=10,
         compute_objective=lambda metrics: metrics["eval_accuracy"],
         backend="optuna"
     )
