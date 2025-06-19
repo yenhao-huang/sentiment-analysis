@@ -12,12 +12,6 @@ Fine-tune a sentiment analysis model on multiple datasets and evaluate its gener
 | dair-ai/emotion             | \~16K | Multi-class Emotion   | Texts labeled with 6 basic emotions        |
 | Sp1786/multiclass-sentiment | \~8K  | Multi-class Sentiment | Sentiment ratings: strongly neg → pos      |
 
----
-
-Sure! Here's the English version of your pretrained model section, with structure and training data details added:
-
----
-
 ## 🔧 Pretrained Models
 
 ### `bert-base-uncased`
@@ -39,7 +33,7 @@ It is based on Google’s original **BERT** architecture introduced in 2018.
 
 ---
 
-## ⚙️ Training Configuration (Trainer Arguments)
+## ⚙️ Training Configuration
 
 ### Optimizer & Learning Rate
 
