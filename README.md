@@ -50,13 +50,15 @@ It is based on Google’s original **BERT** architecture introduced in 2018.
 
 ## ✅ Results
 
-### Fine-tuning Performance
+### Fine-tuning Performance (Accuracy %)
 
-| Dataset          | No Finetune | Finetune | Finetune + Hyperparameter Tuning |
-| ---------------- | ----------- | -------- | -------------------------------- |
-| IMDb             | 49.9%       | 93.2%    | 93.2%                            |
-| dair-ai/emotion  | 34.9%       | 92.4%    | 92.5%                            |
-| Sp1786 sentiment | 37.0%       | 74.9%    | 75.0%                            |
+| Dataset    | Base | FT   | FT + HPT |
+| ---------- | ---- | ---- | -------- |
+| IMDb       | 49.9 | 93.2 | 93.2     |
+| Emotion    | 34.9 | 92.4 | 92.5     |
+| Multiclass | 37.0 | 74.9 | 75.0     |
+
+<sub>Base = No Finetune  FT = Fine-tuned  HPT = Hyperparameter Tuning</sub>
 
 ### 🕒 Training Time
 
